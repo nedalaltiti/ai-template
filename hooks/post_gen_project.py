@@ -34,61 +34,61 @@ PKG = CTX["package_name"]  # convenience alias
 PRUNE_MAP: Dict[str, List[str]] = {
     # ── Core feature-crosscuts ───────────────────────────────────────────────
     "use_prompts": [
-        "src/{{ cookiecutter.package_name }}/prompts",
+        "src/{PKG}/prompts",
     ],
     "include_rag": [
-        "src/{{ cookiecutter.package_name }}/services/rag_service.py",
+        "src/{PKG}/services/rag_service.py",
     ],
     "use_summarization": [
-        "src/{{ cookiecutter.package_name }}/services/summarization_service.py",
+        "src/{PKG}/services/summarization_service.py",
     ],
     # ── GenAI & agents ───────────────────────────────────────────────────────
     "use_genai": [
-        "src/{{ cookiecutter.package_name }}/models/genai",
-        "src/{{ cookiecutter.package_name }}/api/routers/genai_router.py",
+        "src/{PKG}/models/genai",
+        "src/{PKG}/api/routers/genai_router.py",
     ],
     "use_agents": [
-        "src/{{ cookiecutter.package_name }}/models/agents",
-        "src/{{ cookiecutter.package_name }}/api/routers/agent_router.py",
+        "src/{PKG}/models/agents",
+        "src/{PKG}/api/routers/agent_router.py",
     ],
     # ── ML umbrella & fine-grained tasks ─────────────────────────────────────
     "use_ml": [
-        "src/{{ cookiecutter.package_name }}/models/ml",
-        "src/{{ cookiecutter.package_name }}/api/routers/ml_router.py",
+        "src/{PKG}/models/ml",
+        "src/{PKG}/api/routers/ml_router.py",
     ],
     "use_classification": [
-        "src/{{ cookiecutter.package_name }}/models/ml/classification",
-        "src/{{ cookiecutter.package_name }}/services/classification_service.py",
+        "src/{PKG}/models/ml/classification",
+        "src/{PKG}/services/classification_service.py",
     ],
     "use_forecasting": [
-        "src/{{ cookiecutter.package_name }}/models/ml/forecasting",
-        "src/{{ cookiecutter.package_name }}/services/forecasting_service.py",
+        "src/{PKG}/models/ml/forecasting",
+        "src/{PKG}/services/forecasting_service.py",
     ],
     "use_regression": [
-        "src/{{ cookiecutter.package_name }}/models/ml/regression",
+        "src/{PKG}/models/ml/regression",
     ],
     "use_sentiment": [
-        "src/{{ cookiecutter.package_name }}/services/sentiment_service.py",
+        "src/{PKG}/services/sentiment_service.py",
     ],
     # ── Storage / infra switches ─────────────────────────────────────────────
     "use_feature_store": [
-        "src/{{ cookiecutter.package_name }}/infrastructure/storage/feature_store.py",
+        "src/{PKG}/infrastructure/storage/feature_store.py",
     ],
     "use_vector_db": [
-        "src/{{ cookiecutter.package_name }}/infrastructure/storage/vector_db.py",
+        "src/{PKG}/infrastructure/storage/vector_db.py",
     ],
     "use_messaging": [
-        "src/{{ cookiecutter.package_name }}/infrastructure/messaging",
+        "src/{PKG}/infrastructure/messaging",
     ],
     "use_mlflow": [
-        "src/{{ cookiecutter.package_name }}/infrastructure/tracking",
+        "src/{PKG}/infrastructure/tracking",
     ],
     # ── Lightweight mode: if 'yes', delete expanded dirs; if 'no', delete collapsed files
     "lightweight_mode": [
         # If lightweight_mode == "yes", expanded dirs are absent anyway.
         # If == "no", remove the collapsed stubs:
-        "src/{{ cookiecutter.package_name }}/core.py",
-        "src/{{ cookiecutter.package_name }}/pipelines.py",
+        "src/{PKG}/core.py",
+        "src/{PKG}/pipelines.py",
     ],
 }
 
