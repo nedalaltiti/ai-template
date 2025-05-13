@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# {% raw %}
 """Cookiecutter post-generation hook.
 
 • Removes folders/files for every feature the user switched **off**
@@ -20,19 +19,25 @@ ROOT = Path(".").resolve()                # repo root
 # ------------------------------------------------------------------ #
 # 1. Load the cookiecutter answers                                   #
 # ------------------------------------------------------------------ #
-try:                                     # Cookiecutter ≤ 2.1
-    from cookiecutter.utils import load_context  # type: ignore
-    CTX = load_context(ROOT)["cookiecutter"]     # type: ignore[index]
+CTX = {
+    "package_name": "{{ cookiecutter.package_name }}",
+    "lightweight_mode": "{{ cookiecutter.lightweight_mode }}",
+    "use_prompts": "{{ cookiecutter.use_prompts }}",
+    "include_rag": "{{ cookiecutter.include_rag }}",
+    "use_summarization": "{{ cookiecutter.use_summarization }}",
+    "use_genai": "{{ cookiecutter.use_genai }}",
+    "use_agents": "{{ cookiecutter.use_agents }}",
+    "use_ml": "{{ cookiecutter.use_ml }}",
+    "use_classification": "{{ cookiecutter.use_classification }}",
+    "use_forecasting": "{{ cookiecutter.use_forecasting }}",
+    "use_regression": "{{ cookiecutter.use_regression }}",
+    "use_sentiment": "{{ cookiecutter.use_sentiment }}",
+    "use_feature_store": "{{ cookiecutter.use_feature_store }}",
+    "use_vector_db": "{{ cookiecutter.use_vector_db }}",
+    "use_messaging": "{{ cookiecutter.use_messaging }}",
+    "use_mlflow": "{{ cookiecutter.use_mlflow }}",
+}
 
-except ImportError:                      # Cookiecutter ≥ 2.2
-    if "COOKIECUTTER_CONTEXT" in os.environ:     # most Linux builds
-        CTX = json.loads(os.environ["COOKIECUTTER_CONTEXT"])["cookiecutter"]
-    elif (fp := os.environ.get("COOKIECUTTER_CONTEXT_FILE")) and Path(fp).exists():
-        CTX = json.loads(Path(fp).read_text())["cookiecutter"]
-    elif (ROOT / ".cookiecutter.json").exists():  # Home-brew / macOS build
-        CTX = json.loads((ROOT / ".cookiecutter.json").read_text())
-    else:
-        raise SystemExit("❌  Cannot load Cookiecutter context; aborting.")
 
 PKG = CTX["package_name"]                # convenience alias
 
@@ -118,4 +123,3 @@ print(
     "\n   2) poetry install     (or pip install -e .)"
     "\n   3) make dev-up        # spin up local stack"
 )
-# {% endraw %}
