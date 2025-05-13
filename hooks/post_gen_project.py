@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# {% raw %}
 """Cookiecutter post-generation hook.
 
 • Reads the user’s answers.
@@ -144,3 +145,4 @@ print(
     "\n   2.  poetry install  (or pip install -e .)"
     "\n   3.  make dev-up  # spin up services"
 )
+# {% endraw %}
