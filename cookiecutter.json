@@ -63,8 +63,8 @@
     "no"
   ],
   "_copy_without_render": [
-    "*.html",
-    "*.js",
-    "hooks/post_gen_project.py"
-  ]
+  "*.html",
+  "*.js",
+  "hooks/post_gen_project.py"
+]
 }
