@@ -2,10 +2,10 @@
 # {% raw %}
 """Cookiecutter post-generation hook.
 
-• Reads the user’s answers.
+• Reads the user's answers.
 • Removes code paths for any feature that was turned **off**.
 • Prunes now-empty parent directories.
-• Prints a friendly “what next?” banner.
+• Prints a friendly "what next?" banner.
 
 Update PRUNE_MAP if you add new flags later.
 """
@@ -19,13 +19,21 @@ from typing import Dict, List
 # 1. Load context provided by Cookiecutter
 # --------------------------------------------------------------------------- #
 try:
+    # Cookiecutter ≤ 2.1
     from cookiecutter.utils import load_context  # type: ignore
-except ImportError:  # pragma: no cover
-    raise SystemExit("⚠️  This script is meant to run only via Cookiecutter.")
+    ROOT = Path(".").resolve()
+    CTX  = load_context(ROOT)["cookiecutter"]  # type: ignore[index]
+except ImportError:
+    # Cookiecutter ≥ 2.2 – context is provided via env-var
+    import json, os
+    try:
+        CTX = json.loads(os.environ["COOKIECUTTER_CONTEXT"])["cookiecutter"]
+    except Exception as exc:  # pragma: no cover
+        raise SystemExit(f"⚠️  Unable to load Cookiecutter context: {exc}")
 
+# convenience alias
+PKG = CTX["package_name"]
 ROOT = Path(".").resolve()
-CTX = load_context(ROOT)["cookiecutter"]  # type: ignore[index]
-PKG = CTX["package_name"]  # convenience alias
 
 # --------------------------------------------------------------------------- #
 # 2. Map flags ➜ list[paths] to delete when flag == "no"
