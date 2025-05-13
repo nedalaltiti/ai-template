@@ -92,7 +92,7 @@ When generating a new project, you can toggle features using these flags (from `
 
 ```bash
 cookiecutter git@github.com:nedalaltiti/ai-template.git \
-  --checkout v0.1.10 \
+  --checkout v0.1.12 \
   --no-input \
   repo_name=myproject \
   package_name=my_package \
