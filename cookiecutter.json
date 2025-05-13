@@ -1,0 +1,69 @@
+{
+  "repo_name": "ai-sentiment-analysis",
+  "package_name": "ai_sentiment_analysis",
+  "project_description": "AI service for sentiment analysis",
+  "lightweight_mode": [
+    "yes",
+    "no"
+  ],
+  "use_genai": [
+    "yes",
+    "no"
+  ],
+  "use_agents": [
+    "yes",
+    "no"
+  ],
+  "use_ml": [
+    "yes",
+    "no"
+  ],
+  "use_prompts": [
+    "yes",
+    "no"
+  ],
+  "use_classification": [
+    "yes",
+    "no"
+  ],
+  "use_forecasting": [
+    "yes",
+    "no"
+  ],
+  "use_regression": [
+    "yes",
+    "no"
+  ],
+  "use_sentiment": [
+    "yes",
+    "no"
+  ],
+  "include_rag": [
+    "yes",
+    "no"
+  ],
+  "use_summarization": [
+    "yes",
+    "no"
+  ],
+  "use_mlflow": [
+    "yes",
+    "no"
+  ],
+  "use_feature_store": [
+    "yes",
+    "no"
+  ],
+  "use_vector_db": [
+    "yes",
+    "no"
+  ],
+  "use_messaging": [
+    "yes",
+    "no"
+  ],
+  "_copy_without_render": [
+    "*.html",
+    "*.js"
+  ]
+}
