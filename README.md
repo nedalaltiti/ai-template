@@ -82,7 +82,7 @@ When generating a new project, you can toggle features using these flags (from `
 - [Poetry](https://python-poetry.org/) or `pip`
 - [Docker](https://www.docker.com/) (for local dev and deployment)
 - [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) (install via `pipx install cookiecutter`)
-- (Optional) [Alembic](https://alembic.sqlalchemy.org/) for DB migrations
+
 
 ---
 
