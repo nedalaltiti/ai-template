@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ml-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: ml-job
+          image: myproject-job:latest
+          env:
+            - name: APP_ENV
+              value: "prod"
+      restartPolicy: Never 

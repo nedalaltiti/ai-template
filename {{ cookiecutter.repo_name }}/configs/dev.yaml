@@ -1,1 +1,8 @@
 # Development environment config
+app_name: "{{ cookiecutter.repo_name }} (dev)"
+debug: true
+database_url: "sqlite:///./dev.db"
+api_key: "dev-key"
+log_level: "DEBUG"
+
+# Add other dev-specific settings as needed

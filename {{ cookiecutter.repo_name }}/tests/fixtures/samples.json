@@ -1,1 +1,4 @@
-[]
+[
+    {"text": "I love this product!", "label": "positive"},
+    {"text": "This is terrible.", "label": "negative"}
+  ]

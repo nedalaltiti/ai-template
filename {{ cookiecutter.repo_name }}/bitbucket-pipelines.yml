@@ -1,1 +1,20 @@
 # Bitbucket Pipelines
+
+image: python:3.10
+
+pipelines:
+  default:
+    - step:
+        name: "Install & Test"
+        caches:
+          - pip
+        script:
+          - pip install poetry
+          - poetry install
+          - poetry run pytest
+  branches:
+    main:
+      - step:
+          name: "Build & Deploy"
+          script:
+            - echo "Build and deploy steps go here"
