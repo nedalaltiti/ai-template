@@ -6,6 +6,37 @@
 
 ---
 
+## Quick Start (TL;DR)
+
+1. Install prerequisites (macOS):
+   ```bash
+   brew install cookiecutter || pipx install cookiecutter
+   # optionally: brew install pyenv  # to manage Python versions
+   ```
+2. Generate a project (interactive):
+   ```bash
+   cookiecutter https://github.com/nedalaltiti/ai-template.git --checkout main
+   ```
+   - Use underscores for `package_name` (e.g., `my_service`), and answer prompts with `1` or `2`.
+3. Init repo and install deps:
+   ```bash
+   cd <repo_name>
+   git init && git add . && git commit -m "initial"
+   poetry install  # or: python3 -m venv .venv && source .venv/bin/activate && pip install -e .
+   ```
+4. Run the API locally:
+   ```bash
+   uvicorn src.<package_name>.api.app:app --reload
+   ```
+5. Run tests:
+   ```bash
+   pytest
+   ```
+
+Note: Use Cookiecutter to render this project. Do not use GitHub’s “Use this template” button.
+
+---
+
 ## Why This Repo Exists
 
 - **Accelerate AI/ML project setup** with a proven, extensible structure.
@@ -81,7 +112,13 @@ When generating a new project, you can toggle features using these flags (from `
 - Python 3.9+ (recommend using [pyenv](https://github.com/pyenv/pyenv) or [conda](https://docs.conda.io/))
 - [Poetry](https://python-poetry.org/) or `pip`
 - [Docker](https://www.docker.com/) (for local dev and deployment)
-- [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) (install via `pipx install cookiecutter`)
+- [Cookiecutter](https://cookiecutter.readthedocs.io/en/latest/) (install via one of: `brew install cookiecutter`, `pipx install cookiecutter`, or `pip install cookiecutter`)
+
+
+### Naming rules (important)
+
+- `package_name` must be a valid Python identifier: only letters, digits, and underscores; cannot start with a digit. Regex: `^[A-Za-z_][A-Za-z0-9_]*$`
+- `repo_name` can include hyphens, but `package_name` should use underscores (e.g., `my_project`).
 
 
 ---
@@ -90,9 +127,17 @@ When generating a new project, you can toggle features using these flags (from `
 
 ### 1. Generate a New Project
 
+Interactive (recommended):
+
 ```bash
-cookiecutter git@github.com:nedalaltiti/ai-template.git \
-  --checkout v0.1.12 \
+cookiecutter https://github.com/nedalaltiti/ai-template.git --checkout main
+```
+
+Non-interactive (example values — change as needed):
+
+```bash
+cookiecutter https://github.com/nedalaltiti/ai-template.git \
+  --checkout main \
   --no-input \
   repo_name=myproject \
   package_name=my_package \
@@ -101,8 +146,15 @@ cookiecutter git@github.com:nedalaltiti/ai-template.git \
   use_genai=yes \
   use_agents=no \
   use_ml=yes \
-  # ...other flags as needed
+  include_rag=no \
+  use_summarization=no \
+  use_mlflow=no \
+  use_feature_store=no \
+  use_vector_db=no \
+  use_messaging=no
 ```
+
+Tip: You can pin a release instead of `main` by using `--checkout vX.Y.Z`.
 
 ### 2. Initialize Git & Install Dependencies
 
@@ -211,3 +263,24 @@ python scripts/update_from_template.py
 ---
 
 **Happy hacking! 🚀**
+
+---
+
+## Troubleshooting
+
+- "Please select one of the available options":
+  - Enter `1` or `2` at feature prompts, not `yes`/`no`.
+
+- `FileNotFoundError` during post-generation hook (e.g., a path under `src/<package>/models/ml`):
+  - Ensure `package_name` uses underscores (e.g., `my_service`).
+  - Remove the partially generated directory and re-run:
+    ```bash
+    rm -rf <repo_name>
+    cookiecutter https://github.com/nedalaltiti/ai-template.git --checkout main
+    ```
+
+- `ModuleNotFoundError` when running uvicorn:
+  - Use your actual package path, e.g., if `package_name=test_ai_package`:
+    ```bash
+    uvicorn src.test_ai_package.api.app:app --reload
+    ```

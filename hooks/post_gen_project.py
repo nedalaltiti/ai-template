@@ -16,9 +16,6 @@ from typing import Dict, List
 
 ROOT = Path(".").resolve()                # repo root
 
-# ------------------------------------------------------------------ #
-# 1. Load the cookiecutter answers                                   #
-# ------------------------------------------------------------------ #
 CTX = {
     "package_name": "{{ cookiecutter.package_name }}",
     "lightweight_mode": "{{ cookiecutter.lightweight_mode }}",
@@ -41,9 +38,6 @@ CTX = {
 
 PKG = CTX["package_name"]                # convenience alias
 
-# ------------------------------------------------------------------ #
-# 2. Flag → paths to delete when flag == "no"                        #
-# ------------------------------------------------------------------ #
 PRUNE_MAP: Dict[str, List[str]] = {
     # ── Cross-cut helpers ──────────────────────────────────────────
     "use_prompts":       [f"src/{PKG}/prompts"],
@@ -85,9 +79,6 @@ PRUNE_MAP: Dict[str, List[str]] = {
     ],
 }
 
-# ------------------------------------------------------------------ #
-# 3. Helpers                                                         #
-# ------------------------------------------------------------------ #
 def prune(path: Path) -> None:
     if path.is_dir():
         shutil.rmtree(path, ignore_errors=True)
@@ -111,9 +102,6 @@ def prune_empty(start: Path) -> None:
         # Safe to remove empty parent directory
         parent.rmdir()
 
-# ------------------------------------------------------------------ #
-# 4. Apply pruning                                                   #
-# ------------------------------------------------------------------ #
 for flag, paths in PRUNE_MAP.items():
     if flag == "lightweight_mode" and CTX["lightweight_mode"] == "yes":
         continue                                    # keep collapsed stubs
@@ -122,9 +110,6 @@ for flag, paths in PRUNE_MAP.items():
             prune(p)
             prune_empty(p)
 
-# ------------------------------------------------------------------ #
-# 5. Banner                                                          #
-# ------------------------------------------------------------------ #
 print(
     "\n✅  Post-generation cleanup complete."
     "\n👉  Next:"
