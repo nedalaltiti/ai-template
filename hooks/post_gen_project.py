@@ -98,8 +98,17 @@ def prune_empty(start: Path) -> None:
     for parent in start.parents:
         if parent == ROOT:
             break
-        if any(parent.iterdir()):
+        # Parent may not exist if earlier pruning removed deeper paths
+        if not parent.exists():
+            continue
+        try:
+            has_children = any(parent.iterdir())
+        except FileNotFoundError:
+            # Race or concurrent removal; treat as non-existent and continue
+            continue
+        if has_children:
             break
+        # Safe to remove empty parent directory
         parent.rmdir()
 
 # ------------------------------------------------------------------ #
