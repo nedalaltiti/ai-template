@@ -17,6 +17,7 @@ from typing import Dict, List
 ROOT = Path(".").resolve()                # repo root
 
 CTX = {
+    "repo_name": "{{ cookiecutter.repo_name }}",
     "package_name": "{{ cookiecutter.package_name }}",
     "lightweight_mode": "{{ cookiecutter.lightweight_mode }}",
     "use_prompts": "{{ cookiecutter.use_prompts }}",
@@ -37,6 +38,7 @@ CTX = {
 
 
 PKG = CTX["package_name"]                # convenience alias
+REPO = CTX["repo_name"]                  # convenience alias
 
 PRUNE_MAP: Dict[str, List[str]] = {
     # ── Cross-cut helpers ──────────────────────────────────────────
@@ -113,7 +115,8 @@ for flag, paths in PRUNE_MAP.items():
 print(
     "\n✅  Post-generation cleanup complete."
     "\n👉  Next:"
-    "\n   1) git init && git add . && git commit -m 'initial'"
-    "\n   2) poetry install     (or pip install -e .)"
-    "\n   3) make dev-up        # spin up local stack"
+    f"\n   1) cd {REPO}"
+    "\n   2) git init && git add . && git commit -m 'initial'"
+    "\n   3) poetry install     (or pip install -e .)"
+    "\n   4) make dev-up        # spin up local stack"
 )
